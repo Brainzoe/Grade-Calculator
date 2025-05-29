@@ -1,5 +1,6 @@
 // src/components/SubjectInput.jsx
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const gradeLetter = (score) => {
   const num = parseFloat(score);
@@ -33,14 +34,21 @@ const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
   const color = gradeColor(grade);
 
   return (
-    <div className="flex space-x-4 items-center">
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-colors duration-300"
+    >
       <input
         type="text"
         name="name"
         value={subject.name}
         onChange={(e) => onChange(index, e)}
         placeholder="Subject name"
-        className={`border rounded px-3 py-2 flex-grow ${
+        className={`w-full sm:flex-grow border rounded px-3 py-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
           darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-black border-gray-300'
         }`}
       />
@@ -52,7 +60,7 @@ const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
         placeholder="Score"
         min="0"
         max="100"
-        className={`w-24 border rounded px-3 py-2 ${
+        className={`w-full sm:w-24 border rounded px-3 py-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
           darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-black border-gray-300'
         }`}
       />
@@ -67,7 +75,7 @@ const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
       <button
         type="button"
         onClick={() => onRemove(index)}
-        className="text-red-600 hover:text-red-800"
+        className="text-red-600 hover:text-red-800 transition-colors duration-200"
         aria-label="Remove Subject"
       >
         <svg
@@ -85,8 +93,9 @@ const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
           />
         </svg>
       </button>
-    </div>
+    </motion.div>
   );
 };
 
 export default SubjectInput;
+

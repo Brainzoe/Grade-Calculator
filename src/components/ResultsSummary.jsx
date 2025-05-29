@@ -60,42 +60,68 @@ const ResultsSummary = ({
       </p>
 
       {/* Subjects Table */}
-      <div className="overflow-x-auto mt-6 rounded-lg border border-gray-300 dark:border-gray-700">
-        <table
-          className="min-w-full text-center border-collapse"
-          aria-label="Subjects and Scores"
-        >
-          <thead>
-            <tr className="bg-indigo-600 text-white dark:bg-indigo-700">
-              <th className="p-3">Subject</th>
-              <th className="p-3">Score</th>
-              <th className="p-3">Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subjects.map((s, i) =>
-              s.name.trim() === '' ? null : (
-                <tr
-                  key={i}
-                  className={`border-b border-gray-200 dark:border-gray-700 ${i % 2 === 0
-                    ? darkMode
-                      ? 'bg-gray-800'
-                      : 'bg-gray-50'
-                    : darkMode
-                      ? 'bg-gray-900'
-                      : 'bg-white'
-                    }`}
-                >
-                  <td className="p-3 text-black dark:text-white">{s.name}</td>
-                  <td className="p-3 text-black dark:text-white">{s.score}</td>
-                  <td className="p-3 text-black dark:text-white">{gradeLetter(s.score)}</td>
-                </tr>
-              )
-            )}
-          </tbody>
+<div className="overflow-x-auto mt-6 rounded-lg border border-gray-300 dark:border-gray-700">
+  <table className="min-w-full text-center border-collapse md:table hidden" aria-label="Subjects and Scores">
+    <thead>
+      <tr className="bg-indigo-600 text-white dark:bg-indigo-700">
+        <th className="p-3">Subject</th>
+        <th className="p-3">Score</th>
+        <th className="p-3">Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+      {subjects.map((s, i) =>
+        s.name.trim() === '' ? null : (
+          <tr
+            key={i}
+            className={`border-b border-gray-200 dark:border-gray-700 ${i % 2 === 0
+              ? darkMode
+                ? 'bg-gray-800'
+                : 'bg-gray-50'
+              : darkMode
+                ? 'bg-gray-900'
+                : 'bg-white'
+              }`}
+          >
+            <td className="p-3 text-black dark:text-white">{s.name}</td>
+            <td className="p-3 text-black dark:text-white">{s.score}</td>
+            <td className="p-3 text-black dark:text-white">{gradeLetter(s.score)}</td>
+          </tr>
+        )
+      )}
+    </tbody>
+  </table>
 
-        </table>
-      </div>
+  {/* Mobile-friendly stacked table */}
+  <div className="md:hidden space-y-4">
+    {subjects.map((s, i) =>
+      s.name.trim() === '' ? null : (
+        <div
+          key={i}
+          className={`rounded-lg p-4 border border-gray-200 dark:border-gray-700 ${i % 2 === 0
+            ? darkMode
+              ? 'bg-gray-800'
+              : 'bg-gray-50'
+            : darkMode
+              ? 'bg-gray-900'
+              : 'bg-white'
+            }`}
+        >
+          <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+            Subject: <span className="text-black dark:text-white">{s.name}</span>
+          </p>
+          <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+            Score: <span className="text-black dark:text-white">{s.score}</span>
+          </p>
+          <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+            Grade: <span className="text-black dark:text-white">{gradeLetter(s.score)}</span>
+          </p>
+        </div>
+      )
+    )}
+  </div>
+</div>
+
 
 
       {/* Action Buttons */}
