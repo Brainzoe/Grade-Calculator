@@ -64,7 +64,7 @@ const Home = () => {
           {/* Header */}
           <header className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-indigo-700 dark:text-indigo-300 text-center sm:text-left">
-              CGPA Calculator
+              Exam Result
             </h1>
             <button
               onClick={toggleDarkMode}
