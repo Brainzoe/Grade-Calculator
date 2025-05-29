@@ -75,3 +75,20 @@
     zoom: 0.9; /* scale down for better fit */
   }
 }
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  nav, footer, .print\:hidden {
+    display: none !important;
+  }
+
+  #results {
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+}
+

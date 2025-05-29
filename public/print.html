@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Printable Exam Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9fafb;
+        color: #1f2937;
+        padding: 2rem;
+      }
+      .dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .dark .container {
+        background: #111827;
+      }
+      h1 {
+        text-align: center;
+        color: #4f46e5;
+      }
+      .dark h1 {
+        color: #a5b4fc;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+      }
+      th,
+      td {
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        text-align: center;
+      }
+      .dark th,
+      .dark td {
+        border-color: #374151;
+      }
+      th {
+        background-color: #4f46e5;
+        color: white;
+      }
+      .dark th {
+        background-color: #4338ca;
+      }
+      .summary {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+      }
+      .tip-box {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-left: 4px solid #6366f1;
+        background-color: #eef2ff;
+        color: #1e3a8a;
+        font-style: italic;
+      }
+      .dark .tip-box {
+        background-color: #312e81;
+        color: #c7d2fe;
+        border-color: #818cf8;
+      }
+      .print-button-wrapper {
+        text-align: right;
+        margin-bottom: 1rem;
+      }
+      .print-button {
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .print-button:hover {
+        background-color: #4338ca;
+      }
+      @media print {
+        .print-button-wrapper {
+          display: none;
+        }
+        body {
+          background: white;
+          padding: 0;
+        }
+        .container {
+          box-shadow: none;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="print-button-wrapper">
+        <button class="print-button" onclick="window.print()">Print Page</button>
+      </div>
+
+      <h1>Exam Results</h1>
+      <div id="summary" class="summary"></div>
+      <div id="tip" class="tip-box"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="results-table"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const data = JSON.parse(sessionStorage.getItem('printData') || '{}');
+
+      const table = document.getElementById('results-table');
+      const summary = document.getElementById('summary');
+      const tipBox = document.getElementById('tip');
+
+      if (data.darkMode) {
+        document.documentElement.classList.add('dark');
+      }
+
+      if (data.subjects && Array.isArray(data.subjects)) {
+        data.subjects.forEach((s) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${s.name}</td>
+            <td>${s.score}</td>
+            <td>${s.grade}</td>
+          `;
+          table.appendChild(row);
+        });
+      }
+
+      summary.innerHTML = `
+        <p><strong>Average Score:</strong> ${data.average} %</p>
+        <p><strong>Status:</strong> ${data.status}</p>
+      `;
+
+      tipBox.textContent = data.tips || '';
+    </script>
+  </body>
+</html>

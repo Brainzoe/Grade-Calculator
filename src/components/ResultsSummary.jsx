@@ -78,12 +78,12 @@ const ResultsSummary = ({
                 <tr
                   key={i}
                   className={`border-b border-gray-200 dark:border-gray-700 ${i % 2 === 0
-                      ? darkMode
-                        ? 'bg-gray-800'
-                        : 'bg-gray-50'
-                      : darkMode
-                        ? 'bg-gray-900'
-                        : 'bg-white'
+                    ? darkMode
+                      ? 'bg-gray-800'
+                      : 'bg-gray-50'
+                    : darkMode
+                      ? 'bg-gray-900'
+                      : 'bg-white'
                     }`}
                 >
                   <td className="p-3 text-black dark:text-white">{s.name}</td>
@@ -101,19 +101,20 @@ const ResultsSummary = ({
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-4 mt-6 print:hidden">
         <button
-          onClick={onPrint}
+          onClick={() => onPrint?.()}
           className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-md shadow transition"
           aria-label="Print Results"
         >
           Print Results
         </button>
         <button
-          onClick={onExportCSV}
+          onClick={() => onExportCSV?.()}
           className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-md shadow transition"
           aria-label="Export Results to CSV"
         >
           Export CSV
         </button>
+
       </div>
     </section>
   );

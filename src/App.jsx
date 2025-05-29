@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Results from './pages/Results';
-import PrintResults from './pages/PrintResults';
+// import PrintResults from './pages/PrintResults';
 import { SubjectsProvider } from './context/SubjectsContext';
 
 const App = () => (
@@ -11,7 +11,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/results" element={<Results />} />
-        <Route path="/print" element={<PrintResults />} />
+        {/* <Route path="/print" element={<PrintResults />} /> */}
       </Routes>
     </Router>
   </SubjectsProvider>
