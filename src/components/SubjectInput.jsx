@@ -1,7 +1,37 @@
 // src/components/SubjectInput.jsx
 import React from 'react';
 
+const gradeLetter = (score) => {
+  const num = parseFloat(score);
+  if (isNaN(num)) return '';
+  if (num >= 80) return 'A';
+  if (num >= 65) return 'B';
+  if (num >= 55) return 'C';
+  if (num >= 40) return 'D';
+  return 'F';
+};
+
+const gradeColor = (grade) => {
+  switch (grade) {
+    case 'A':
+      return 'bg-green-500';
+    case 'B':
+      return 'bg-blue-500';
+    case 'C':
+      return 'bg-yellow-500';
+    case 'D':
+      return 'bg-orange-500';
+    case 'F':
+      return 'bg-red-600';
+    default:
+      return 'bg-gray-400';
+  }
+};
+
 const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
+  const grade = gradeLetter(subject.score);
+  const color = gradeColor(grade);
+
   return (
     <div className="flex space-x-4 items-center">
       <input
@@ -26,6 +56,14 @@ const SubjectInput = ({ index, subject, onChange, onRemove, darkMode }) => {
           darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-black border-gray-300'
         }`}
       />
+      {grade && (
+        <div
+          className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold text-lg ${color}`}
+          title={`Grade: ${grade}`}
+        >
+          {grade}
+        </div>
+      )}
       <button
         type="button"
         onClick={() => onRemove(index)}
