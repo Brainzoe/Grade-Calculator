@@ -77,23 +77,26 @@ const ResultsSummary = ({
               s.name.trim() === '' ? null : (
                 <tr
                   key={i}
-                  className={`border-b border-gray-200 dark:border-gray-700 ${
-                    i % 2 === 0
+                  className={`border-b border-gray-200 dark:border-gray-700 ${i % 2 === 0
                       ? darkMode
                         ? 'bg-gray-800'
                         : 'bg-gray-50'
-                      : ''
-                  }`}
+                      : darkMode
+                        ? 'bg-gray-900'
+                        : 'bg-white'
+                    }`}
                 >
-                  <td className="p-3">{s.name}</td>
-                  <td className="p-3">{s.score}</td>
-                  <td className="p-3">{gradeLetter(s.score)}</td>
+                  <td className="p-3 text-black dark:text-white">{s.name}</td>
+                  <td className="p-3 text-black dark:text-white">{s.score}</td>
+                  <td className="p-3 text-black dark:text-white">{gradeLetter(s.score)}</td>
                 </tr>
               )
             )}
           </tbody>
+
         </table>
       </div>
+
 
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-4 mt-6 print:hidden">
