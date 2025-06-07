@@ -37,11 +37,20 @@ export const SubjectsProvider = ({ children }) => {
   }, [subjects]);
 
   // Helper function for status (same as your original)
+  // const calculateStatus = (avg) => {
+  //   if (avg >= 90) return 'Honour Roll';
+  //   if (avg >= 66) return 'Merit Roll';
+  //   return 'Probation';
+  // };
+
   const calculateStatus = (avg) => {
-    if (avg >= 90) return 'Honour Roll';
-    if (avg >= 66) return 'Merit Roll';
-    return 'Probation';
-  };
+  if (avg >= 90 && avg <= 100) return 'Excellent';
+  if (avg >= 85 && avg < 90) return 'Very Good';
+  if (avg >= 70 && avg < 85) return 'Good';
+  if (avg >= 65 && avg < 70) return 'Pass';
+  return 'Fail';
+};
+
 
   return (
     <SubjectsContext.Provider
